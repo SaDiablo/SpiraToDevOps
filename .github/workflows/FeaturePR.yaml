@@ -1,7 +1,7 @@
-name: feature
+name: FeaturePR
 
 on:
-  push:
+  pull_request:
     branches: [ feature/** ]
 
 jobs:
@@ -13,8 +13,8 @@ jobs:
     runs-on: windows-latest 
 
     env:
-        Solution_Name: SpiraToDevOps.sln
-        Project_Path: SpiraToDevOps\SpiraToDevOps.csproj
+      Solution_Name: SpiraToDevOps.sln
+      Project_Path: SpiraToDevOps\SpiraToDevOps.csproj
 
     steps:
     - name: Checkout
@@ -38,3 +38,6 @@ jobs:
 
     - name: Build project
       run: dotnet build --no-restore $env:Solution_Name
+
+    - name: Execute unit tests
+      run: dotnet test
