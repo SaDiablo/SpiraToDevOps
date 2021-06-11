@@ -1,7 +1,8 @@
 name: Hotfix
 
 on:
-  branches: [ hotfix/** ]
+  push:
+    branches: [ hotfix/** ]
 
 jobs:
   build:

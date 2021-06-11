@@ -7,18 +7,24 @@
 
 name: ReleasePR
 
-on: [push]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+on: 
+  pull-request:
+    branches: [ release ]
+ 
+jobs: 
+  build: 
+    strategy: 
+      matrix: 
+        configuration: [ Debug, Release ] 
+ 
+    runs-on: windows-latest 
+ 
+    env: 
+      Solution_Name: SpiraToDevOps.sln 
+      Project_Path: SpiraToDevOps\SpiraToDevOps.csproj 
+ 
+    steps: 
+    - name: Checkout 
+      uses: actions/checkout@v2 
+      with: 
+        fetch-depth: 0
