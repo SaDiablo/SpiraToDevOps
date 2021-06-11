@@ -1,0 +1,31 @@
+name: feature
+
+on:
+  push:
+    branches: [ feature/** ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug]
+
+    runs-on: windows-latest 
+
+    env:
+        Solution_Name: SpiraToDevOps.sln
+        Project_Path: SpiraToDevOps\SpiraToDevOps.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Build
+      run: dotnet build --no-restore $env:Solution_Name
