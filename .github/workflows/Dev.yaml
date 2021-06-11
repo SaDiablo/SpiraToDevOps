@@ -1,0 +1,32 @@
+# Dev
+#
+# Build project (Debug, Release)
+# Deploy project (Debug, Release)
+#
+# Unit-test
+#
+# Build installers
+# Deploy installers (Debug, Release)
+
+name: Dev
+
+on:
+  branches: [ dev ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [ Debug ]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: SpiraToDevOps.sln
+      Project_Path: SpiraToDevOps\SpiraToDevOps.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0

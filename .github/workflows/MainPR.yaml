@@ -1,0 +1,35 @@
+# Main PullRequest
+#
+# From 
+# Release or Hotfix  
+# to 
+# Main
+#
+# Build project (Release and Debug for support purposes)
+# Run Unit tests
+# Run Integration tests if available
+
+name: MainPR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [ Debug, Release ]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: SpiraToDevOps.sln
+      Project_Path: SpiraToDevOps\SpiraToDevOps.csproj
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+

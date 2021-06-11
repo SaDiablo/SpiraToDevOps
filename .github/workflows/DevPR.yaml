@@ -1,17 +1,24 @@
-name: FeaturePR
+# Dev PullRequest
+#
+# From 
+# Feature  
+# to 
+# Dev
+#
+# Build project
+# Run Unit-tests
+
+name: DevPR
 
 on:
   pull_request:
-    branches: [ feature/** ]
-  #temporary addition for testing code analysis
-  push: 
-    branches: [ feature/** ]
+    branches: [ dev ]
 
 jobs:
   build:
     strategy:
       matrix:
-        configuration: [Debug]
+        configuration: [ Debug ]
 
     runs-on: windows-latest
 
@@ -36,7 +43,7 @@ jobs:
   test:
     strategy:
       matrix:
-        configuration: [Debug]
+        configuration: [ Debug ]
 
     runs-on: windows-latest
 
@@ -59,6 +66,7 @@ jobs:
       run: dotnet test
 
   analyze:
+    needs: [ build, test ]
     name: Analyze
     #csharp winforms build requires windows
     runs-on: windows-latest
